@@ -19,7 +19,7 @@ public class CreateStudentDemo {
 
 		try {
 
-			Student theStudent = new Student("Eva", "van Geenen", "mijn@email");
+			Student theStudent = new Student("Eva", "van Klasse", "mijn@email");
 
 			session.beginTransaction();
 			

@@ -1,33 +1,46 @@
 package com.luv2code.hibernate.demo;
 
+import java.io.Serializable;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import com.luv2code.hibernate.demo.entity.Student;
 
-public class CreateStudentDemo {
+public class UpdateStudentDemo {
 
 	public static void main(String[] args) {
 		
 		SessionFactory factory = new Configuration()
-				.configure()							//default is "hibernate.cfg.xml"
+				.configure()							
 				.addAnnotatedClass(Student.class)
 				.buildSessionFactory();
 
 		Session session = factory.getCurrentSession();
+		
 
 		try {
 
-			Student theStudent = new Student("Eva", "TikkieTikkie", "mijn@email");
-
+			int studentId = 6;
+			
 			session.beginTransaction();
 			
-			session.save(theStudent);
+			Student myStudent = session.get(Student.class, studentId);
+			
+			myStudent.setLastName("TikkieTikkie");
 			
 			session.getTransaction().commit();
 			
-
+			session = factory.getCurrentSession();
+			
+			session.beginTransaction();
+			
+			session.createQuery("UPDATE Student set email='lalal@la.com' WHERE lastName='TikkieTikkie'")
+			.executeUpdate();
+			
+			session.getTransaction().commit();
+			
 		}finally {
 			factory.close();
 		}

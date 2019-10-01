@@ -1,6 +1,7 @@
 package com.luv2code.hibernate.demo;
 
 import java.io.Serializable;
+import java.text.ParseException;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -22,7 +23,7 @@ public class ReadStudentDemo {
 
 		try {
 
-			Student miaStudent = new Student("Tiffany", "Hooks", "tiffy@froofroo.com");
+			Student miaStudent = new Student("Tiffany", "Hooks", "tiffy@froofroo.com", DateUtils.useDefaultDate());
 			
 			session.beginTransaction();
 			
@@ -34,6 +35,9 @@ public class ReadStudentDemo {
 			
 			session.getTransaction().commit();
 			
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}finally {
 			factory.close();
 		}

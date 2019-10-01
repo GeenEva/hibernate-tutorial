@@ -1,5 +1,7 @@
 package com.luv2code.hibernate.demo;
 
+import java.text.ParseException;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -19,9 +21,9 @@ public class PrimaryKeyDemo {
 
 		try {
 
-			Student theStudent = new Student("Lieke", "van Landeren", "haar@email");
-			Student theStudent2 = new Student("Hans", "de Boer", "zijn@email");
-			Student theStudent3 = new Student("Jansje", "Klasse", "hullie@eimaw");
+			Student theStudent = new Student("Lieke", "van Landeren", "haar@email", DateUtils.useDefaultDate());
+			Student theStudent2 = new Student("Hans", "de Boer", "zijn@email", DateUtils.useDefaultDate());
+			Student theStudent3 = new Student("Jansje", "Klasse", "hullie@eimaw", DateUtils.useDefaultDate());
 			
 			session.beginTransaction();
 			
@@ -32,6 +34,8 @@ public class PrimaryKeyDemo {
 			session.getTransaction().commit();
 			
 
+		} catch (ParseException e) {
+			e.printStackTrace();
 		}finally {
 			factory.close();
 		}

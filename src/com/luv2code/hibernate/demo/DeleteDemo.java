@@ -1,42 +1,49 @@
 package com.luv2code.hibernate.demo;
 
-import java.text.ParseException;
+import java.util.Date;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import com.luv2code.hibernate.demo.entity.DateUtils;
+import com.luv2code.hibernate.demo.entity.Instructor;
+import com.luv2code.hibernate.demo.entity.InstructorDetail;
 import com.luv2code.hibernate.demo.entity.Student;
 
-public class PrimaryKeyDemo {
+public class DeleteDemo {
 
 	public static void main(String[] args) {
 		
 		SessionFactory factory = new Configuration()
 				.configure()						
-				.addAnnotatedClass(Student.class)
+				.addAnnotatedClass(Instructor.class)
+				.addAnnotatedClass(InstructorDetail.class)
 				.buildSessionFactory();
 
 		Session session = factory.getCurrentSession();
 
 		try {
 
-			Student theStudent = new Student("Lieke", "van Landeren", "haar@email", DateUtils.useDefaultDate());
-			Student theStudent2 = new Student("Hans", "de Boer", "zijn@email", DateUtils.useDefaultDate());
-			Student theStudent3 = new Student("Jansje", "Klasse", "hullie@eimaw", DateUtils.useDefaultDate());
+			int id = 1;
 			
 			session.beginTransaction();
 			
-			session.save(theStudent);
-			session.save(theStudent2);
-			session.save(theStudent3);
+			Instructor temp = session.get(Instructor.class, id);
+			
+			if (temp != null ) {
+				session.delete(temp);
+			}
+			
 			
 			session.getTransaction().commit();
 			
 
-		} catch (ParseException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
+		}
+		
+		finally {
 			factory.close();
 		}
 

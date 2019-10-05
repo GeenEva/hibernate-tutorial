@@ -1,4 +1,4 @@
-package com.luv2code.hibernate.demo.entity;
+package com.luv2code.hibernate.demo;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -6,7 +6,8 @@ import java.util.Date;
 
 public class DateUtils {
 
-private static SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+
+	private static SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 	
 	
 	public static Date parseDate(String dateStr) throws ParseException {
@@ -32,5 +33,4 @@ private static SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 		
 		return parseDate("08/11/1981");
 	}
-	
 }

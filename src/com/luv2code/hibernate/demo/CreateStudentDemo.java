@@ -6,31 +6,29 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import com.luv2code.hibernate.demo.entity.DateUtils;
-import com.luv2code.hibernate.demo.entity.Instructor;
-import com.luv2code.hibernate.demo.entity.InstructorDetail;
 import com.luv2code.hibernate.demo.entity.Student;
 
-public class CreateDemo {
+public class CreateStudentDemo {
 
 	public static void main(String[] args) {
 		
 		SessionFactory factory = new Configuration()
-				.configure()						
-				.addAnnotatedClass(Instructor.class)
-				.addAnnotatedClass(InstructorDetail.class)
+				.configure()							//default is "hibernate.cfg.xml"
+				.addAnnotatedClass(Student.class)
 				.buildSessionFactory();
 
 		Session session = factory.getCurrentSession();
 
 		try {
 
-			Instructor tempInstructor = new Instructor("Joli", "Luika", "lakka@dori");
-			tempInstructor.setInstructorDetail(new InstructorDetail("yourTube", "sewing"));
+			String dateOfBirth = "11/11/1981";
+			Date theDateOfBirth = DateUtils.parseDate(dateOfBirth);
 			
+			Student theStudent = new Student("Evolino", "TikkieTikkie", "mijn@email", theDateOfBirth );
+
 			session.beginTransaction();
 			
-			session.save(tempInstructor); 
+			session.save(theStudent);
 			
 			session.getTransaction().commit();
 			

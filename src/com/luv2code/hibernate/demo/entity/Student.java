@@ -11,6 +11,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.luv2code.hibernate.demo.DateUtils;
 
 @Entity
 @Table(name="student")
